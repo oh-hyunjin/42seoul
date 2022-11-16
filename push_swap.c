@@ -6,37 +6,11 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 12:47:44 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/11 15:04:13 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/16 09:51:20 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-t_list	*find_list(t_list *top, int num)
-{
-	t_list	*temp;
-
-	temp = top;
-	while (temp != NULL)
-	{
-		if (temp->num == num)
-			return (temp);
-		temp = temp->next;
-	}
-	printf("cant find\n");
-	return (top);
-}
-
-void	all_list_del(t_list *lst)
-{
-	t_list	*temp;
-
-	while (lst)
-	{
-		temp = lst->next;
-		free(temp);
-	}
-}
 
 int	parsing(int argc, char *argv[], t_vars *a)
 {
@@ -98,7 +72,10 @@ void	setting(int argc, t_vars *a, t_vars *b)
 	int	pivot1;
 	int	pivot2;
 
+	a->name = 'a';
+	b->name = 'b';
 	a->len = argc - 1;
+	b->len = 0;
 	pivot1 = a->len / 3;
 	pivot2 = a->len / 3 * 2;
 	a->top = NULL; // 필요 없나?
@@ -107,27 +84,51 @@ void	setting(int argc, t_vars *a, t_vars *b)
 	b->btm = NULL;
 }
 
-void	under_pivot1()
+void	pivot(int len, t_vars *a, t_vars *b)
 {
-	
+	int		pivot_1;
+	int		pivot_2;
+	t_list	*temp;
+
+	pivot_1 = len / 3 * 2;	// 66
+	pivot_2 = len / 3;		// 33
+	// printf("pivot = %d, %d\n\n", pivot_1, pivot_2);
+	while (len-- > 0)
+	{
+		temp = a->top;
+		if (temp->num < pivot_1)
+		{
+			push(a, b);
+			if (temp->num < pivot_2)
+				rotate(b);
+		}
+		
+		else
+			rotate(a);
+	}
+	while (a->len > 3)
+		push(a, b);
 }
 
-void	under_pivot2()
+void	hardcoding(t_vars *a)
 {
-	
-}
+	t_list	*first;
+	t_list	*second;
+	t_list	*third;
 
-int main(int argc, char *argv[])
-{
-	t_vars	a;
-	t_vars	b;
-
-	setting(argc, &a, &b);
-	parsing(argc, argv, &a);
-	indexing(&a);
-	command_test(&a, &b);
-	under_pivot1();
-	under_pivot2();
-
-	printf("\n");
+	// printf("hardcoding!!\n");
+	while (1)
+	{
+		first = a->top->num;
+		second = first->next->num;
+		third = second->next->num;
+		if (first < second && second < third)
+			break ;
+		else if (first > second && first > third)
+			rotate(a);
+		else if (second > first && second > third)
+			r_rotate(a);
+		else if (third > first && third > second)
+			swap(a);
+	}
 }
