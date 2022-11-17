@@ -6,15 +6,15 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 14:24:03 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/14 10:19:30 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/17 10:22:04 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	all_list_del(t_list *lst)
+void	all_list_del(t_node *lst)
 {
-	t_list	*temp;
+	t_node	*temp;
 
 	while (lst)
 	{
@@ -23,9 +23,9 @@ void	all_list_del(t_list *lst)
 	}
 }
 
-t_list	*find_list(t_list *top, int num)
+t_node	*find_list(t_node *top, int num)
 {
-	t_list	*temp;
+	t_node	*temp;
 
 	temp = top;
 	while (temp != NULL)
@@ -71,11 +71,11 @@ int atoi_valid_check(char *str, int *result)
 	return (1);
 }
 
-t_list	*new_add_list(t_list *prev_node, int val)
+t_node	*new_add_list(t_node *prev_node, int val)
 {
-	t_list	*new;
+	t_node	*new;
 
-	new = (t_list *)malloc(sizeof(t_list));
+	new = (t_node *)malloc(sizeof(t_node));
 	if (!new)
 		return (NULL);
 	// printf("(new!)\n");

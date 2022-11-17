@@ -6,99 +6,95 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:08:37 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/14 15:11:25 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/17 12:06:46 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	count_instruction_num(t_vars *a, t_vars *b)
+int	ft_abs(int num)
 {
-	int		i;
-	int		ra_cnt;
-	int		rb_cnt;
-	t_list	*a_temp;
-	t_list	*b_temp;
+	if (num >= 0)
+		return (num);
+	return (-num);
+}
 
-	i = -1;
-	b_temp = b->top;
-	while(++i < b->len)
+// TODO ra나 rb가 a->len의 절반이나 b->len의 절반을 넘으면 -로 바꿔서 reverse임을 나타내기....
+//		-> 그럼 min_cnt 비교해서 구할 때 절대값으로/..............
+void	get_min_instruction(t_list	*a_lst, t_list *b_lst, t_node *min)
+{
+	t_node	*a;
+	t_node	*b;
+	int		ra_num; // int형 맞나..
+	int		rb_num;
+	int		del;
+
+	b = b_lst->top;
+	if (b->index == 1)
+			del = 1;
+	rb_num = 0;
+	while(b != NULL) // < get rb >
 	{
-		ra_cnt = 0;
-		rb_cnt = i;
-		if (i > b->len / 2)
-			rb_cnt = b->len - i;
-		if (a->top->index < b_temp->index) // ra 해야되는 경우
+		a = a_lst->top;
+		ra_num = 0;
+		while (a != NULL) // < get ra > // ra_num == a->len 이면 ra_num = 0....
 		{
-			a_temp = a->top;
-			while (a_temp->index < b_temp->index)
+			if (a->next == NULL)
 			{
-				ra_cnt++;
-				a_temp = a_temp->next;
+				ra_num = 0;
+				break ;// 맞나..
 			}
+			if (a->index < b->index && b->index < a->next->index \
+			 		|| b->index < a->next->index && a->next->index < a->index)
+			{
+				ra_num++;
+				break ;
+			}
+			a = a->next;
+			ra_num++;
 		}
-		b_temp->cnt = ra_cnt + rb_cnt + 1;
-		b_temp = b_temp->next;
+		b->ra_num = ra_num;
+		if (ra_num > a_lst->len / 2)
+			b->ra_num = ra_num - a_lst->len;
+		b->rb_num = rb_num;
+		if (rb_num > b_lst->len / 2)
+			b->rb_num = rb_num - b_lst->len;
+		if (ft_abs(b->ra_num) + ft_abs(b->rb_num) < min->ra_num + min->rb_num)
+			min = b;
+		printf("(%d, %d+%d) ", b->index, b->rb_num, b->ra_num);
+		b = b->next;
+		rb_num++;
 	}
+	printf("<min: %d>", min->index);
+	printf("\n");
 }
 
-t_list	*min_instruction_num(t_vars *a, t_vars *b)
-{
-	t_list	*temp;
-	t_list	*min;
+// struct cnt : ra_num, rb_num 하나 만들까..
 
-	temp = b->top;
-	min = temp;
-	while (temp != NULL)
+void	rotateStack_beforePush(t_list *stack, int num)
+{
+	while (num > 0)
 	{
-		if (temp->cnt < min->cnt)
-			min = temp;
-		temp = temp->next;
+		rotate(stack);
+		num--;
 	}
-	printf("min cnt : (%d, %d)\n", min->num, min->cnt);
-	return (min);
-}
-
-void	put_target_top(t_vars *b, t_list *tar)
-{
-	int		i;
-	t_list	*temp;
-
-	temp = b->top;
-	i = 0; // 몇 번째에 있는지 -> ra or rra 결정
-	while (temp != tar)
+	while (num < 0)
 	{
-		i++;
-		temp = temp->next;
-	}
-	if (i < b->len / 2) // rotate b
-		while (!i--)
-			rotate(b);
-	else // reverse rotate b
-	{
-		i = b->len - i;
-		while (!i--)
-			r_rotate(b);
+		r_rotate(stack);
+		num++; 
 	}
 }
 
-void	set_a_stack(t_vars *a, t_list *tar)
+void	greedy(t_list *a, t_list *b)
 {
-	if (tar->index < a->top)
-		return ;
-	while ()
-}
-
-void	greedy(t_vars *a, t_vars *b)
-{
-	t_list	*target;
+	t_node	*target;
 
 	while (b->len != 0)
 	{
-		count_instruction_num(&a, &b);
-		target = min_instruction_num(&a, &b); // 가장 적은 명령 수 찾기 = target
-		put_target_top(&b, target); // rb or rrb로 target노드를 위로 올리기
-		set_a_stack(&a, target); // target노드를 push할 위치를 만들기
-		push(&b, &a);
+		target = b->top;
+		get_min_instruction(a, b, target); // 가장 적은 명령 수 찾기 = target
+		rotateStack_beforePush(b, target->rb_num); // rb or rrb로 target노드를 위로 올리기
+		rotateStack_beforePush(a, target->ra_num); // target노드를 push할 위치를 만들기
+		push(b, a);
 	}
 }

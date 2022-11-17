@@ -6,7 +6,7 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 14:24:37 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/14 13:54:52 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/17 10:18:44 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,51 +16,53 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-typedef struct s_vars
+typedef struct s_list
 {
 	char			name;
 	int				len;
-	struct s_list	*top;
-	struct s_list	*btm;
-}	t_vars;
+	struct s_node	*top;
+	struct s_node	*btm;
+}	t_list;
 
-typedef struct s_list
+typedef struct s_node
 {
 	int				num;
-	int				cnt;
 	int				index;
-	struct s_list	*prev;
-	struct s_list	*next;
-}	t_list;
+	int				ra_num;
+	int				rb_num;
+	struct s_node	*prev;
+	struct s_node	*next;
+}	t_node;
 
 
 // instruction.c
-void	swap(t_vars *vars);
-void	push(t_vars *before, t_vars *after);
-void	rotate(t_vars *vars);
-void	r_rotate(t_vars	*vars);
+void	swap(t_list *vars);
+void	push(t_list *before, t_list *after);
+void	rotate(t_list *vars);
+void	r_rotate(t_list	*vars);
 
 // push_swap.c
-int		parsing(int argc, char *argv[], t_vars *a);
-void	indexing(t_vars *a);
-void	setting(int argc, t_vars *a, t_vars *b);
-void	pivot(int len, t_vars *a, t_vars *b);
-void	hardcoding(t_vars *a);
+int		parsing(int argc, char *argv[], t_list *a);
+void	indexing(t_list *a);
+void	setting(int argc, t_list *a, t_list *b);
+void	pivot(int len, t_list *a, t_list *b);
+void	hardcoding(t_list *a);
 
 // greedy.c
-void	count_num(t_vars *a, t_vars *b);
-t_list *min_cnt(t_vars *a, t_vars *b);
-void	put_target_top(t_vars *b, t_list *tar);
-void	set_a_stack(t_vars *a, t_list *tar);
+void	greedy(t_list *a, t_list *b);
+void	count_num(t_list *a, t_list *b);
+void	get_min_instruction(t_list	*a_lst, t_list *b_lst, t_node *min);
+void	put_target_b_top(t_list *b, t_node *tar);
+void	set_a_stack(t_list *a, t_node *tar);
 
 // utils.c
-void	all_list_del(t_list *var);
+void	all_list_del(t_node *var);
 int		atoi_valid_check(char *str, int *result);
-t_list	*new_add_list(t_list *prev_node, int val);
-t_list	*find_list(t_list *top, int num);
+t_node	*new_add_list(t_node *prev_node, int val);
+t_node	*find_list(t_node *top, int num);
 
 // test.c
-void	test_print(t_vars *a, t_vars *b);
-void	command_test(t_vars *a, t_vars *b);
+void	test_print(t_list *a, t_list *b);
+void	command_test(t_list *a, t_list *b);
 
 #endif

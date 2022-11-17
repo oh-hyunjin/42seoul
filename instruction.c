@@ -6,16 +6,16 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 14:44:41 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/14 12:19:56 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/17 11:20:33 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(t_vars *vars)
+void	swap(t_list *vars)
 {
-	t_list	*first;
-	t_list	*second;
+	t_node	*first;
+	t_node	*second;
 
 	first = vars->top;
 	second = first->next;
@@ -40,10 +40,10 @@ void	swap(t_vars *vars)
 		vars->btm = first;
 }
 
-void	push(t_vars *before, t_vars *after)
+void	push(t_list *before, t_list *after)
 {
-	t_list	*new_before_top;
-	t_list	*new_after_top;
+	t_node	*new_before_top;
+	t_node	*new_after_top;
 
 	if (before->top == 0)
 	{
@@ -51,9 +51,9 @@ void	push(t_vars *before, t_vars *after)
 		return ;
 	}
 	if (after->name == 'a')
-		printf("pa\n");
+		printf("pa <%d>\n", before->top->index);
 	else
-		printf("pb\n");
+		printf("pb <%d>\n", before->top->index);
 	// printf(", %d\n", before->top->num);
 	new_after_top = before->top;
 	new_before_top = before->top->next;
@@ -72,7 +72,7 @@ void	push(t_vars *before, t_vars *after)
 	after->len++;
 }
 
-void	rotate(t_vars *vars) // index로 해야 하나??
+void	rotate(t_list *vars) // index로 해야 하나??
 {
 	if (vars->top == NULL)
 	{
@@ -82,9 +82,9 @@ void	rotate(t_vars *vars) // index로 해야 하나??
 	if (vars->len == 1)
 		return ;
 	if (vars->name == 'a')
-		printf("ra\n");
+		printf("ra <%d>\n", vars->top->index);
 	else
-		printf("rb\n");
+		printf("rb <%d>\n", vars->top->index);
 	// printf(", %d\n", vars->top->num);
 	vars->top->prev = vars->btm;
 	vars->btm->next = vars->top;
@@ -94,7 +94,7 @@ void	rotate(t_vars *vars) // index로 해야 하나??
 	vars->btm->next = NULL;
 }
 
-void	r_rotate(t_vars *vars)
+void	r_rotate(t_list *vars)
 {
 	if (vars->top == NULL)
 	{
@@ -104,9 +104,9 @@ void	r_rotate(t_vars *vars)
 	if (vars->len == 1)
 		return ;
 	if (vars->name == 'a')
-		printf("\nrra\n");
+		printf("rra <%d>\n", vars->btm->index);
 	else
-		printf("rrb\n");
+		printf("rrb <%d>\n", vars->btm->index);
 	// printf(", %d\n", vars->top->num);
 	vars->top->prev = vars->btm;
 	vars->btm->next = vars->top;

@@ -6,15 +6,15 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:03:04 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/13 16:04:04 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/17 10:21:09 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	test_print(t_vars *a, t_vars *b)
+void	test_print(t_list *a, t_list *b)
 {
-	t_list	*temp;
+	t_node	*temp;
 
 	printf("a : ");
 	temp = a->top;
@@ -37,7 +37,7 @@ void	test_print(t_vars *a, t_vars *b)
 	printf("\n----------------------\n\n");
 }
 
-void	command_test(t_vars *a, t_vars *b)
+void	command_test(t_list *a, t_list *b)
 {
 	// test_print(a, b);
 

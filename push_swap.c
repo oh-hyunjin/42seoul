@@ -6,15 +6,15 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 12:47:44 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/16 09:51:20 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/17 10:56:34 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	parsing(int argc, char *argv[], t_vars *a)
+int	parsing(int argc, char *argv[], t_list *a)
 {
-	t_list	*temp;
+	t_node	*temp;
 	int		i;
 	int		val;
 
@@ -41,12 +41,12 @@ int	parsing(int argc, char *argv[], t_vars *a)
 	return (1);
 }
 
-void	indexing(t_vars *a)
+void	indexing(t_list *a)
 {
 	int		idx;
 	int		max_num;
-	t_list	*max_node;
-	t_list	*temp;
+	t_node	*max_node;
+	t_node	*temp;
 
 	idx = a->len - 1;
 	while (idx >= 0)
@@ -67,7 +67,7 @@ void	indexing(t_vars *a)
 	}
 }
 
-void	setting(int argc, t_vars *a, t_vars *b)
+void	setting(int argc, t_list *a, t_list *b)
 {
 	int	pivot1;
 	int	pivot2;
@@ -84,14 +84,14 @@ void	setting(int argc, t_vars *a, t_vars *b)
 	b->btm = NULL;
 }
 
-void	pivot(int len, t_vars *a, t_vars *b)
+void	pivot(int len, t_list *a, t_list *b)
 {
 	int		pivot_1;
 	int		pivot_2;
-	t_list	*temp;
+	t_node	*temp;
 
-	pivot_1 = len / 3 * 2;	// 66
-	pivot_2 = len / 3;		// 33
+	pivot_1 = len / 3 * 2;	// 4
+	pivot_2 = len / 3;		// 2
 	// printf("pivot = %d, %d\n\n", pivot_1, pivot_2);
 	while (len-- > 0)
 	{
@@ -110,18 +110,18 @@ void	pivot(int len, t_vars *a, t_vars *b)
 		push(a, b);
 }
 
-void	hardcoding(t_vars *a)
+void	hardcoding(t_list *a)
 {
-	t_list	*first;
-	t_list	*second;
-	t_list	*third;
+	int	first;
+	int	second;
+	int	third;
 
 	// printf("hardcoding!!\n");
 	while (1)
 	{
 		first = a->top->num;
-		second = first->next->num;
-		third = second->next->num;
+		second = a->top->next->num;
+		third = a->top->next->next->num;
 		if (first < second && second < third)
 			break ;
 		else if (first > second && first > third)
