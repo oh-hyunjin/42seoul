@@ -6,61 +6,55 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:08:37 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/19 13:04:26 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/19 14:53:33 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rotateStack_beforePush(t_list *a, t_list *b, t_node *min)
+void	rotate_together(t_list *a, t_list *b, int *ra_num, int *rb_num)
 {
-	if (min->ra_num > 0 && min->rb_num > 0)
+	while (*ra_num > 0 && *rb_num > 0)
 	{
-		while (min->ra_num != 0 && min->rb_num != 0)
-		{
-			rr(a, b);
-			min->ra_num--;
-			min->rb_num--;
-		}
+		rr(a, b);
+		(*ra_num)--;
+		(*rb_num)--;
 	}
-	else if (min->ra_num < 0 && min->rb_num < 0)
+	while (*ra_num < 0 && *rb_num < 0)
 	{
-		while (min->ra_num != 0 && min->rb_num != 0)
-		{
-			rrr(a, b);
-			min->ra_num++;
-			min->rb_num++;
-		}
-	}
-	while (min->ra_num != 0)
-	{
-		if (min->ra_num > 0)
-		{
-			ra(a);
-			min->ra_num--;
-		}
-		else
-		{
-			rra(a);
-			min->ra_num++;
-		}
-	}
-	while (min->rb_num != 0)
-	{
-		if (min->rb_num > 0)
-		{
-			rb(b);
-			min->rb_num--;
-		}
-		else
-		{
-			rrb(b);
-			min->rb_num++;
-		}
+		rrr(a, b);
+		(*ra_num)++;
+		(*rb_num)++;
 	}
 }
 
-int	isMin(t_node *b, t_node *min, t_rotateNum rotateCnt, int alen, int blen)
+void	rotate_before_push(t_list *a, t_list *b, int ra_num, int rb_num)
+{
+	if ((ra_num < 0 && rb_num < 0) || (ra_num > 0 && rb_num > 0))
+		rotate_together(a, b, &ra_num, &rb_num);
+	while (rb_num > 0)
+	{
+		rb(b);
+		rb_num--;
+	}
+	while (rb_num < 0)
+	{
+		rrb(b);
+		rb_num++;
+	}
+	while (ra_num > 0)
+	{
+		ra(a);
+		ra_num--;
+	}
+	while (ra_num < 0)
+	{
+		rra(a);
+		ra_num++;
+	}
+}
+
+int	is_min(t_node *b, t_node *min, t_rotateNum rotateCnt, int alen, int blen)
 {
 	b->ra_num = rotateCnt.ra;
 	b->rb_num = rotateCnt.rb;
@@ -86,7 +80,7 @@ void	get_min_instruction(t_list	*a_lst, t_list *b_lst, t_node **min)
 	{
 		a = a_lst->top;
 		rotateCnt.ra = 1;
-		while (a->next != NULL) // < get ra > // prev를 다루면??
+		while (a->next != NULL) // < get ra >
 		{
 			if (a->index < b->index && b->index < a->next->index \
 			|| b->index < a->next->index && a->next->index < a->index \
@@ -95,7 +89,7 @@ void	get_min_instruction(t_list	*a_lst, t_list *b_lst, t_node **min)
 			a = a->next;
 			rotateCnt.ra++;
 		}
-		if (isMin(b, *min, rotateCnt, a_lst->len, b_lst->len))
+		if (is_min(b, *min, rotateCnt, a_lst->len, b_lst->len))
 			*min = b;
 		b = b->next;
 		rotateCnt.rb++;
@@ -112,23 +106,12 @@ void	greedy(t_list *a_lst, t_list *b_lst)
 		min->ra_num = 0;
 		min->rb_num = 0;
 		get_min_instruction(a_lst, b_lst, &min); // 가장 적은 명령 수 찾기
-		rotateStack_beforePush(a_lst, b_lst, min);
+		rotate_before_push(a_lst, b_lst, min->ra_num, min->rb_num);
 		pa(b_lst, a_lst);
-		// test_print(a_lst, b_lst);
 	}
 }
 
 
-
-
-// TODO: min값 변경은 되는데 변경된대로 rra 변경이 안됨
-// (12 8 4 9 2 10 7 5 3 0 6 1 11) -> [5 6 8 9 10 11 12], [7 4 2 3 0 1]에서
-	//min값은 7->4로 변경이 됐는데.. get_min_instruction -> greedy 과정에서 다시 초기화
-		//돼서 min=b_lst->top으로 돌아감!!!!!!!!!
-
-// rr처리 전 : 100->554~6nn, 500->4500 
-// rr 처리 해서 확인하기
-
-// built-in, origin, changed 
+// built-in, origin, changed(rr, rrr)
 // <100> 573, 613, 583
 // <500> 5227, 4570, 4270
