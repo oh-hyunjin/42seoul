@@ -6,7 +6,7 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:03:04 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/17 10:21:09 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/18 14:36:31 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,25 @@ void	test_print(t_list *a, t_list *b)
 {
 	t_node	*temp;
 
+	if (a == NULL)
+		return ;
 	printf("a : ");
 	temp = a->top;
 	while (temp != NULL)
 	{
-		printf("[%d:%d]", temp->num, temp->index);
+		printf("[%d]", temp->num);
 		temp = temp->next;
 	}
 	if (a->top != NULL && a->btm != NULL)
 		printf(" (%d, %d)", a->top->num, a->btm->num);
-	printf("\nb : ");
+	printf("\n");
+	if (b == NULL)
+		return ;
+	printf("b : ");
 	temp = b->top;
 	while (temp != NULL)
 	{
-		printf("[%d:%d]", temp->num, temp->index);
+		printf("[%d]", temp->num);
 		temp = temp->next;
 	}
 	if (b->top != NULL && b->btm != NULL)

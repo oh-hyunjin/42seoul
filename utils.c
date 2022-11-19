@@ -6,19 +6,27 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 14:24:03 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/17 10:22:04 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/19 10:12:09 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+int	ft_abs(int num)
+{
+	if (num >= 0)
+		return (num);
+	return (-num);
+}
+
 void	all_list_del(t_node *lst)
 {
 	t_node	*temp;
 
-	while (lst)
+	while (lst != NULL)
 	{
-		temp = lst->next;
+		temp = lst;
+		lst = lst->next;
 		free(temp);
 	}
 }

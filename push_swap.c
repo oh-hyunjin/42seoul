@@ -6,11 +6,88 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 12:47:44 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/17 10:56:34 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/19 11:09:50 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	hardcoding(t_list *a)
+{
+	int	first;
+	int	second;
+	int	third;
+
+	while (1)
+	{
+		first = a->top->index;
+		second = a->top->next->index;
+		if (a->len < 3)
+			third = 4;
+		else
+			third = a->top->next->next->index;
+		if (first < second && second < third)
+			break ;
+		else if (first > second && first > third)
+			ra(a);
+		else if (second > first && second > third)
+			rra(a);
+		else if (third > first && third > second)
+			sa(a);
+	}
+}
+
+void	pivot(int len, t_list *a, t_list *b) // 3개 이하: only hardcoding
+{										 // 4개: a스택에 2개만 남어서 hardcoding에서 예외처리해야됨
+	int		pivot_1;
+	int		pivot_2;
+	t_node	*temp;
+
+	if (len <= 3)
+		return ;
+	pivot_1 = len / 3 * 2;
+	pivot_2 = len / 3;
+	while (len-- > 0)
+	{
+		temp = a->top;
+		if (temp->index < pivot_1)
+		{
+			pb(a, b);
+			if (temp->index < pivot_2)
+				rb(b);
+		}
+		else
+			ra(a);
+	}
+	while (a->len > 3)
+		pb(a, b);
+}
+
+void	indexing(t_list *a)
+{
+	int		idx;
+	int		max_num;
+	t_node	*max_node;
+	t_node	*temp;
+
+	idx = a->len - 1;
+	while (idx >= 0)
+	{
+		temp = a->top;
+		max_num = -2147483648;
+		while (temp != NULL)
+		{
+			if (temp->num > max_num && temp->index == 0)
+			{
+				max_node = temp;
+				max_num = max_node->num;
+			}
+			temp = temp->next;
+		}
+		max_node->index = idx;
+		idx--;
+	}
+}
 
 int	parsing(int argc, char *argv[], t_list *a)
 {
@@ -41,94 +118,12 @@ int	parsing(int argc, char *argv[], t_list *a)
 	return (1);
 }
 
-void	indexing(t_list *a)
-{
-	int		idx;
-	int		max_num;
-	t_node	*max_node;
-	t_node	*temp;
-
-	idx = a->len - 1;
-	while (idx >= 0)
-	{
-		temp = a->top;
-		max_num = -100;
-		while (temp != NULL)
-		{
-			if (temp->num > max_num && temp->index == 0)
-			{
-				max_node = temp;
-				max_num = max_node->num;
-			}
-			temp = temp->next;
-		}
-		max_node->index = idx;
-		idx--;
-	}
-}
-
 void	setting(int argc, t_list *a, t_list *b)
 {
-	int	pivot1;
-	int	pivot2;
-
-	a->name = 'a';
-	b->name = 'b';
 	a->len = argc - 1;
 	b->len = 0;
-	pivot1 = a->len / 3;
-	pivot2 = a->len / 3 * 2;
 	a->top = NULL; // 필요 없나?
 	a->btm = NULL; // 이것도..
 	b->top = NULL;
 	b->btm = NULL;
-}
-
-void	pivot(int len, t_list *a, t_list *b)
-{
-	int		pivot_1;
-	int		pivot_2;
-	t_node	*temp;
-
-	pivot_1 = len / 3 * 2;	// 4
-	pivot_2 = len / 3;		// 2
-	// printf("pivot = %d, %d\n\n", pivot_1, pivot_2);
-	while (len-- > 0)
-	{
-		temp = a->top;
-		if (temp->num < pivot_1)
-		{
-			push(a, b);
-			if (temp->num < pivot_2)
-				rotate(b);
-		}
-		
-		else
-			rotate(a);
-	}
-	while (a->len > 3)
-		push(a, b);
-}
-
-void	hardcoding(t_list *a)
-{
-	int	first;
-	int	second;
-	int	third;
-
-	// printf("hardcoding!!\n");
-	while (1)
-	{
-		first = a->top->num;
-		second = a->top->next->num;
-		third = a->top->next->next->num;
-		if (first < second && second < third)
-			break ;
-		else if (first > second && first > third)
-			rotate(a);
-		else if (second > first && second > third)
-			r_rotate(a);
-		else if (third > first && third > second)
-			swap(a);
-	}
 }
