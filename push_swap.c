@@ -6,13 +6,13 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 12:47:44 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/19 11:09:50 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/21 09:08:28 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	hardcoding(t_list *a)
+void	hardcoding(t_info *vars)
 {
 	int	first;
 	int	second;
@@ -20,24 +20,24 @@ void	hardcoding(t_list *a)
 
 	while (1)
 	{
-		first = a->top->index;
-		second = a->top->next->index;
-		if (a->len < 3)
+		first = vars->a.top->index;
+		second = vars->a.top->next->index;
+		if (vars->a.len < 3)
 			third = 4;
 		else
-			third = a->top->next->next->index;
+			third = vars->a.top->next->next->index;
 		if (first < second && second < third)
 			break ;
 		else if (first > second && first > third)
-			ra(a);
+			ra(vars);
 		else if (second > first && second > third)
-			rra(a);
+			rra(vars);
 		else if (third > first && third > second)
-			sa(a);
+			sa(vars);
 	}
 }
 
-void	pivot(int len, t_list *a, t_list *b) // 3개 이하: only hardcoding
+void	pivot(int len, t_info *vars) // 3개 이하: only hardcoding
 {										 // 4개: a스택에 2개만 남어서 hardcoding에서 예외처리해야됨
 	int		pivot_1;
 	int		pivot_2;
@@ -46,21 +46,21 @@ void	pivot(int len, t_list *a, t_list *b) // 3개 이하: only hardcoding
 	if (len <= 3)
 		return ;
 	pivot_1 = len / 3 * 2;
-	pivot_2 = len / 3;
+	pivot_2 = len / 3; 
 	while (len-- > 0)
 	{
-		temp = a->top;
+		temp = vars->a.top;
 		if (temp->index < pivot_1)
 		{
-			pb(a, b);
+			pb(vars);
 			if (temp->index < pivot_2)
-				rb(b);
+				rb(vars);
 		}
 		else
-			ra(a);
+			ra(vars);
 	}
-	while (a->len > 3)
-		pb(a, b);
+	while (vars->a.len > 3)
+		pb(vars);
 }
 
 void	indexing(t_list *a)
@@ -118,12 +118,12 @@ int	parsing(int argc, char *argv[], t_list *a)
 	return (1);
 }
 
-void	setting(int argc, t_list *a, t_list *b)
+void	setting(int argc, t_info *vars)
 {
-	a->len = argc - 1;
-	b->len = 0;
-	a->top = NULL; // 필요 없나?
-	a->btm = NULL; // 이것도..
-	b->top = NULL;
-	b->btm = NULL;
+	vars->a.len = argc - 1;
+	vars->b.len = 0;
+	vars->a.top = NULL; // 필요 없나?
+	vars->a.btm = NULL; // 이것도..
+	vars->b.top = NULL;
+	vars->b.btm = NULL;
 }

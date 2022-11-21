@@ -6,7 +6,7 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 14:24:37 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/19 14:55:30 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/21 08:59:04 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-
 typedef struct s_list
 {
-	char			name;
 	int				len;
 	struct s_node	*top; // 굳이 top 안 해도.....
 	struct s_node	*btm;
@@ -35,6 +33,12 @@ typedef struct s_node
 	struct s_node	*next;
 }	t_node;
 
+typedef struct s_info
+{
+	struct s_list	a;
+	struct s_list	b;
+}	t_info;
+
 typedef struct s_rotateNum
 {
 	int	ra; // int형 맞나..
@@ -48,27 +52,27 @@ void	rotate(t_list *vars);
 void	r_rotate(t_list	*vars);
 
 // instruction.c
-void	sa(t_list *vars);
-void	pa(t_list *before, t_list *after);
-void	pb(t_list *before, t_list *after);
-void	ra(t_list *vars);
-void	rb(t_list *vars);
-void	rr(t_list *a, t_list *b);
-void	rra(t_list *vars);
-void	rrb(t_list *vars);
-void	rrr(t_list *a, t_list *b);
+void	sa(t_info *vars);
+void	pa(t_info *vars);
+void	pb(t_info *vars);
+void	ra(t_info *vars);
+void	rb(t_info *vars);
+void	rr(t_info *vars);
+void	rra(t_info *vars);
+void	rrb(t_info *vars);
+void	rrr(t_info *vars);
 
 // push_swap.c
 int		parsing(int argc, char *argv[], t_list *a);
 void	indexing(t_list *a);
-void	setting(int argc, t_list *a, t_list *b);
-void	pivot(int len, t_list *a, t_list *b);
-void	hardcoding(t_list *a);
+void	setting(int argc, t_info *vars);
+void	pivot(int len, t_info *vars);
+void	hardcoding(t_info *vars);
 
 // greedy.c
-void	greedy(t_list *a, t_list *b);
+void	greedy(t_info *vars);
 void	count_num(t_list *a, t_list *b);
-void	get_min_instruction(t_list	*a_lst, t_list *b_lst, t_node **min);
+void	get_min_instruction(t_info *vars, t_node **min);
 void	put_target_b_top(t_list *b, t_node *tar);
 void	set_a_stack(t_list *a, t_node *tar);
 
