@@ -6,7 +6,7 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 12:47:44 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/22 15:14:32 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/22 16:17:13 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	parsing(int argc, char *argv[], t_list *a)
 	while (++i < argc)
 	{
 		split_ret = ft_split(argv[i], ' '); // split fail: 1. mallocfail, 구분자,,?
-		if (split_ret == NULL)
+		if (split_ret == NULL || *split_ret == NULL)
 			return (-1);
 		t = -1;
 		while (split_ret[++t] != NULL)

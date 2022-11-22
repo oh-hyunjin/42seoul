@@ -6,13 +6,13 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 16:21:30 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/21 09:39:08 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/23 08:33:22 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sa(t_info *vars)
+void	swap(t_info *vars)
 {
 	t_node	*first;
 	t_node	*second;
@@ -31,6 +31,14 @@ void	sa(t_info *vars)
 	vars->a.top = second;
 	if (first->next == NULL)
 		vars->a.btm = first;
+}
+
+void	sa(t_info *vars)
+{
+	if (vars->a.top == 0 || vars->a.top->next == 0)
+		return ;
+	printf("sa\n");
+	swap(&vars->a);
 }
 
 void	pa(t_info *vars)
