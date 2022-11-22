@@ -6,7 +6,7 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 12:47:44 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/22 09:12:07 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/22 15:14:32 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,75 +89,38 @@ void	indexing(t_list *a)
 	}
 }
 
-
-
-
-
-
-
-
-// int	parsing(int argc, char *argv[], t_list *a)
-// {
-// 	t_node	*temp;
-// 	int		i;
-// 	int		val;
-
-// 	if (atoi_valid_check(argv[1], &val) == -1)
-// 		return (-1);
-// 	a->top = new_add_list(NULL, val);
-// 	if (a->top == NULL)
-// 		return (-1);
-// 	temp = a->top;
-// 	i = 1;
-// 	while (++i < argc)
-// 	{
-// 		if (atoi_valid_check(argv[i], &val) == -1)
-// 			return (-1);
-// 		temp->next = new_add_list(temp, val);
-// 		if (temp->next == NULL)
-// 		{
-// 			all_list_del(a->top);
-// 			return (-1);
-// 		}
-// 		temp = temp->next;
-// 	}
-// 	a->btm = temp;
-// 	return (1);
-// }
-
-
 int	parsing(int argc, char *argv[], t_list *a)
 {
-	t_node	*temp;
+	char	**split_ret;
 	int		i;
+	int		t;
 	int		val;
 
-	if (atoi_valid_check(argv[1], &val) == -1)
-		return (-1);
-	a->top = new_add_list(NULL, val);
-	if (a->top == NULL)
-		return (-1);
-	temp = a->top;
-	i = 1;
+	i = 0;
 	while (++i < argc)
 	{
-		if (atoi_valid_check(argv[i], &val) == -1)
+		split_ret = ft_split(argv[i], ' '); // split fail: 1. mallocfail, 구분자,,?
+		if (split_ret == NULL)
 			return (-1);
-		temp->next = new_add_list(temp, val);
-		if (temp->next == NULL)
+		t = -1;
+		while (split_ret[++t] != NULL)
 		{
-			all_list_del(a->top);
-			return (-1);
+			if (atoi_valid_check(split_ret[t], &val) == -1)
+				return (-1);
+			if (new_add_list(a, val) == -1)
+				return (-1);
+			(a->len)++;
 		}
-		temp = temp->next;
+		while (--t >= 0)
+			free(split_ret[t]);
+		free(split_ret);
 	}
-	a->btm = temp;
 	return (1);
 }
 
-void	setting(int argc, t_info *vars)
+void	setting(t_info *vars) // setting ㅅㅏㄱ제???
 {
-	vars->a.len = argc - 1;
+	vars->a.len = 0;
 	vars->b.len = 0;
 	vars->a.top = NULL; // 필요 없나?
 	vars->a.btm = NULL; // 이것도..

@@ -6,7 +6,7 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 14:24:03 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/22 09:33:58 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/22 12:38:34 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,23 @@ int	atoi_valid_check(char *str, int *result)
 	return (1);
 }
 
-t_node	*new_add_list(t_node *prev_node, int val)
+int	new_add_list(t_list *a, int val)
 {
 	t_node	*new;
 
 	new = (t_node *)malloc(sizeof(t_node));
 	if (!new)
-		return (NULL);
+		return (-1);
+	new->prev = a->btm; // a->btm == NULL(맨 처음)일 때 역참조..?
+	new->next = NULL;
 	new->num = val;
 	new->index = 0;
-	new->prev = prev_node;
-	new->next = NULL;
-	return (new);
+	if (a->top == NULL)
+		a->top = new;
+	else
+		a->btm->next = new;
+	a->btm = new;
+	return (1);
 }
 
 void	last_sort(t_info *vars)

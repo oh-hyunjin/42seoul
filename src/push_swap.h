@@ -6,15 +6,17 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 14:24:37 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/22 08:02:50 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/22 16:06:43 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	PUSH_SWAP_H
+#ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include <stdio.h>
 # include <stdlib.h>
+# include <stdio.h>
+# include "../lib/src/libft/libft.h"
+# include "../lib/src/get_next_line/get_next_line.h"
 
 typedef struct s_list
 {
@@ -49,7 +51,7 @@ typedef struct s_rotateNum
 void	last_sort(t_info *vars);
 
 // push_swap.c
-void	setting(int argc, t_info *vars);
+void	setting(t_info *vars);
 int		parsing(int argc, char *argv[], t_list *a);
 void	indexing(t_list *a);
 void	pivot(int len, t_info *vars);
@@ -83,7 +85,7 @@ void	rotate_together(t_info *vars, int *ra_num, int *rb_num);
 // utils.c
 void	all_list_del(t_node *var);
 int		atoi_valid_check(char *str, int *result);
-t_node	*new_add_list(t_node *prev_node, int val);
+int		new_add_list(t_list *a, int val);
 int		ft_abs(int num);
 
 // test.c

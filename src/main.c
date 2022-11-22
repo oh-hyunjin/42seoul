@@ -6,7 +6,7 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:05:59 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/22 08:26:53 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/22 14:55:46 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@ int	main(int argc, char *argv[])
 
 	if (argc == 1)
 		return (0); // 프롬프트 반환?
-	setting(argc, &vars);
+	setting(&vars);
 	if (parsing(argc, argv, &vars.a) == -1)
 	{
 		printf("Error\n");
 		return (0);
 	}
 	indexing(&vars.a);
-	pivot(argc - 1, &vars);
+	pivot(vars.a.len, &vars);
 	hardcoding(&vars);
 	greedy(&vars);
 	last_sort(&vars);
-	// system("leaks a.out");
+	// system("leaks push_swap");
 	// ft_free(&a, &b); 만들기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
 

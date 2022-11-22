@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/12 14:10:25 by hyoh              #+#    #+#             */
-/*   Updated: 2022/07/19 11:51:40 by hyoh             ###   ########.fr       */
+/*   Created: 2022/11/21 13:17:31 by hyoh              #+#    #+#             */
+/*   Updated: 2022/11/22 16:10:24 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
+// bonus 폴더 만들어야 되는지..
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+int main()
 {
-	t_list	*last;
+	char	*command;
 
-	if (*lst == 0)
-		*lst = new;
-	else
+
+	while (1)
 	{
-		last = ft_lstlast(*lst);
-		last->next = new;
+		command = get_next_line(0);
+		if (command == NULL)
+			return (0);
+		printf("%s<\n", command);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:08:37 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/21 12:41:34 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/22 12:23:04 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ void	get_min_instruction(t_info *vars, t_node **min)
 		rotate_cnt.ra = 1;
 		while (a->next != NULL) // < get ra >
 		{
-			if (a->index < b->index && b->index < a->next->index \
-			|| b->index < a->next->index && a->next->index < a->index \
-			|| a->next->index < a->index && a->index < b->index)
+			if ((a->index < b->index && b->index < a->next->index) \
+			|| (b->index < a->next->index && a->next->index < a->index) \
+			|| (a->next->index < a->index && a->index < b->index))
 				break ;
 			a = a->next;
 			rotate_cnt.ra++;

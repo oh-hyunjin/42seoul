@@ -1,6 +1,8 @@
 {
 	"files.associations": {
 		"ratio": "c",
-		"algorithm": "c"
+		"algorithm": "c",
+		"libft.h": "c",
+		"stdlib.h": "c"
 	}
 }

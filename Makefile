@@ -6,14 +6,15 @@
 #    By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 12:29:03 by hyoh              #+#    #+#              #
-#    Updated: 2022/11/22 08:52:39 by hyoh             ###   ########.fr        #
+#    Updated: 2022/11/22 16:09:33 by hyoh             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	push_swap
+NAME		= push_swap
+NAME_BN		= checker
 
 CC			=	cc
-CFLAG		=	-Wall -Wextra -Werror
+CFLAG		=	-Wall -Wextra -Werror -g3
 AR			=	ar -crs
 RM			=	rm -f
 
@@ -28,25 +29,36 @@ SRC			=	main.c\
 				greedy.c\
 				utils.c
 
-OBJ		=	$(addprefix $(SRC_DIR)/, $(SRC:.c=.o))
+SRC_BN		=	checker_bonus.c
+
+OBJ			=	$(addprefix $(SRC_DIR)/, $(SRC:.c=.o))
+OBJ_BN		=	$(addprefix $(SRC_DIR)/, $(SRC_BN:.c=.o))
+ifdef WITH_BONUS
+	OBJECT = $(OBJ_BN)
+else
+	OBJECT = $(OBJ)
+endif
 
 all : $(NAME)
 
-$(NAME) : $(OBJ)
+$(NAME) : $(OBJECT)
 	make -C $(LIB_DIR)
-	$(CC) $(CFLAG) $(OBJ) -L $(LIB_DIR) -l _ft -o $(NAME)
+	$(CC) $(CFLAG) $(OBJECT) -L $(LIB_DIR) -l _ft -o $(NAME)
 
-%.o : %.C
+%.o : %.c
 	$(CC) $(CFLAG) -c $< -o $@
+
+bonus :
+	make WITH_BONUS=1 all
 
 clean :
 	make clean -C $(LIB_DIR)
-	$(RM) $(OBJ)
+	$(RM) $(OBJ) $(OBJ_BN)
 
 fclean : clean
 	make fclean -C $(LIB_DIR)
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(NAME_BN)
 
 re : fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus
