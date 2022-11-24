@@ -9,7 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/push_swap",
-			"args": ["", 1],
+			"args": ["3 1"],
 			"stopAtEntry": false,
 			"cwd": "${fileDirname}",
 			"environment": [],
@@ -19,5 +19,3 @@
 
 	]
 }
-
-// 1,2,3 넣으면 정렬된 상태라 아무것도 출력 안하는데 ㄱㅊ?

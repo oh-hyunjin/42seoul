@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   getlen_bonus.c                                     :+:      :+:    :+:   */
+/*   getlen.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 08:46:59 by hyoh              #+#    #+#             */
-/*   Updated: 2022/09/29 10:18:02 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/23 15:28:48 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	intlen(t_info *info, long num)
+int	intlen(t_info2 *info, long num)
 {
 	int	len;
 
@@ -35,7 +35,7 @@ int	intlen(t_info *info, long num)
 	return (len);
 }
 
-int	uintlen(t_info *info, unsigned int num)
+int	uintlen(t_info2 *info, unsigned int num)
 {
 	int	len;
 
@@ -51,7 +51,7 @@ int	uintlen(t_info *info, unsigned int num)
 	return (len);
 }
 
-int	hexlen(t_info *info, unsigned long num)
+int	hexlen(t_info2 *info, unsigned long num)
 {
 	int	len;
 
@@ -74,7 +74,7 @@ int	hexlen(t_info *info, unsigned long num)
 	return (len);
 }
 
-int	ft_strlen(t_info *info, void *var)
+int	ft_strlen3(t_info2 *info, void *var)
 {
 	char	*str;
 	int		len;
@@ -94,7 +94,7 @@ int	ft_strlen(t_info *info, void *var)
 	return (len);
 }
 
-int	get_zero_num(t_info info)
+int	get_zero_num(t_info2 info)
 {
 	int	num;
 

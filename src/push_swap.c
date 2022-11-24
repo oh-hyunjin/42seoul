@@ -6,7 +6,7 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 12:47:44 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/22 16:17:13 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/24 09:52:42 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	indexing(t_list *a)
 	}
 }
 
-int	parsing(int argc, char *argv[], t_list *a)
+int	parsing(char *argv[], t_list *a)
 {
 	char	**split_ret;
 	int		i;
@@ -97,33 +97,30 @@ int	parsing(int argc, char *argv[], t_list *a)
 	int		val;
 
 	i = 0;
-	while (++i < argc)
+	while (argv[++i] != NULL)
 	{
-		split_ret = ft_split(argv[i], ' '); // split fail: 1. mallocfail, 구분자,,?
+		split_ret = ft_split(argv[i], ' ');
 		if (split_ret == NULL || *split_ret == NULL)
 			return (-1);
 		t = -1;
 		while (split_ret[++t] != NULL)
 		{
-			if (atoi_valid_check(split_ret[t], &val) == -1)
-				return (-1);
-			if (new_add_list(a, val) == -1)
-				return (-1);
+			if (atoi_valid_check(a, split_ret[t], &val) == -1 \
+				|| new_add_list(a, val) == -1)
+				return (free_split(split_ret, t));
 			(a->len)++;
 		}
-		while (--t >= 0)
-			free(split_ret[t]);
-		free(split_ret);
+		free_split(split_ret, t);
 	}
 	return (1);
 }
 
-void	setting(t_info *vars) // setting ㅅㅏㄱ제???
+void	setting(t_info *vars)
 {
 	vars->a.len = 0;
 	vars->b.len = 0;
-	vars->a.top = NULL; // 필요 없나?
-	vars->a.btm = NULL; // 이것도..
+	vars->a.top = NULL;
+	vars->a.btm = NULL;
 	vars->b.top = NULL;
 	vars->b.btm = NULL;
 }

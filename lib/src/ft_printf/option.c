@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   option_bonus.c                                     :+:      :+:    :+:   */
+/*   option.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 10:40:01 by hyoh              #+#    #+#             */
-/*   Updated: 2022/09/29 09:54:57 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/23 15:24:33 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	flag_check(const char **fix, int flag[])
 	}
 }
 
-void	width_check(va_list ap, const char **fix, t_info *info)
+void	width_check(va_list ap, const char **fix, t_info2 *info)
 {
 	int	w;
 
@@ -58,7 +58,7 @@ void	width_check(va_list ap, const char **fix, t_info *info)
 	info -> width = w;
 }
 
-void	preci_check(va_list ap, const char **fix, t_info *info)
+void	preci_check(va_list ap, const char **fix, t_info2 *info)
 {
 	int	p;
 
@@ -85,7 +85,7 @@ void	preci_check(va_list ap, const char **fix, t_info *info)
 	}
 }
 
-int	check(t_info *info, long long *ret)
+int	check(t_info2 *info, long long *ret)
 {
 	if (info->flag[3] == 1)
 		info->flag[4] = 0;

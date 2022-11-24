@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_put_bonus.c                                     :+:      :+:    :+:   */
+/*   put.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 08:42:34 by hyoh              #+#    #+#             */
-/*   Updated: 2022/09/28 16:05:35 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/23 15:24:40 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_putnbr(int len, long long num, long long *ret)
 	write(1, &c, 1);
 }
 
-void	ft_putchar(char a, int num, t_info info, long long *ret)
+void	ft_putchar(char a, int num, t_info2 info, long long *ret)
 {
 	if (info.flag[4])
 		a = '0';
@@ -38,7 +38,7 @@ void	ft_putchar(char a, int num, t_info info, long long *ret)
 	}
 }
 
-void	ft_putsign(int var, t_info *info)
+void	ft_putsign(int var, t_info2 *info)
 {
 	if (var < 0)
 		write(1, "-", 1);
@@ -52,7 +52,7 @@ void	ft_putsign(int var, t_info *info)
 	return ;
 }
 
-void	ft_putprefix(unsigned long var, t_info info)
+void	ft_putprefix(unsigned long var, t_info2 info)
 {
 	if (!info.flag[0] || var == 0)
 		return ;
@@ -62,7 +62,7 @@ void	ft_putprefix(unsigned long var, t_info info)
 		write(1, "0X", 2);
 }
 
-void	ft_putnbr_base(unsigned long var, t_info info, long long *ret)
+void	ft_putnbr_base(unsigned long var, t_info2 info, long long *ret)
 {
 	char	num;
 	char	*base;

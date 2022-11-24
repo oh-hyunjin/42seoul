@@ -6,7 +6,7 @@
 #    By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/22 08:11:20 by hyoh              #+#    #+#              #
-#    Updated: 2022/11/22 15:48:31 by hyoh             ###   ########.fr        #
+#    Updated: 2022/11/23 15:40:13 by hyoh             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,11 +61,6 @@ FT_PRINTF_SRC		=	ft_printf.c \
 						type.c \
 						put.c \
 						getlen.c \
-						ft_printf_bonus.c \
-						option_bonus.c \
-						type_bonus.c \
-						put_bonus.c \
-						getlen_bonus.c
 
 GET_NEXT_LINE_SRC	=	get_next_line.c \
 						get_next_line_utils.c \

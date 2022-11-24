@@ -3,6 +3,8 @@
 		"ratio": "c",
 		"algorithm": "c",
 		"libft.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"push_swap_bonus.h": "c",
+		"get_next_line.h": "c"
 	}
 }

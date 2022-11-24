@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 08:32:27 by hyoh              #+#    #+#             */
-/*   Updated: 2022/09/29 12:54:16 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/23 15:21:52 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	get_blank_num(t_info info)
+int	get_blank_num(t_info2 info)
 {
 	int	num;
 
@@ -22,7 +22,7 @@ int	get_blank_num(t_info info)
 	return (num);
 }
 
-int	print_ptr(uintptr_t var, t_info info, long long *ret)
+int	print_ptr(uintptr_t var, t_info2 info, long long *ret)
 {
 	info.len = hexlen(&info, var);
 	info.zero = 0;
@@ -45,7 +45,7 @@ int	print_ptr(uintptr_t var, t_info info, long long *ret)
 	return (0);
 }
 
-int	print_percent(t_info info, long long *ret)
+int	print_percent(t_info2 info, long long *ret)
 {
 	info.blank = info.width - 1;
 	if (info.blank < 0)
@@ -66,7 +66,7 @@ int	print_percent(t_info info, long long *ret)
 	return (0);
 }
 
-int	run(va_list ap, t_info info, long long *ret)
+int	run(va_list ap, t_info2 info, long long *ret)
 {
 	int	r;
 
@@ -96,7 +96,7 @@ int	run(va_list ap, t_info info, long long *ret)
 int	ft_printf(const char *fix, ...)
 {
 	long long	ret;
-	t_info		info;
+	t_info2		info;
 	va_list		ap;
 
 	va_start(ap, fix);

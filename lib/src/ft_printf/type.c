@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_bonus.c                                       :+:      :+:    :+:   */
+/*   type.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 09:09:58 by hyoh              #+#    #+#             */
-/*   Updated: 2022/09/29 10:14:44 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/23 15:39:37 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	print_int(int var, t_info info, long long *ret)
+int	print_int(int var, t_info2 info, long long *ret)
 {
 	info.len = intlen(&info, var);
 	info.zero = get_zero_num(info);
@@ -40,7 +40,7 @@ int	print_int(int var, t_info info, long long *ret)
 	return (0);
 }
 
-int	print_uin(unsigned int var, t_info info, long long *ret)
+int	print_uin(unsigned int var, t_info2 info, long long *ret)
 {
 	info.len = uintlen(&info, var);
 	info.zero = get_zero_num(info);
@@ -63,7 +63,7 @@ int	print_uin(unsigned int var, t_info info, long long *ret)
 	return (0);
 }
 
-int	print_hex(unsigned int var, t_info info, long long *ret)
+int	print_hex(unsigned int var, t_info2 info, long long *ret)
 {
 	info.len = hexlen(&info, var);
 	info.zero = get_zero_num(info);
@@ -91,7 +91,7 @@ int	print_hex(unsigned int var, t_info info, long long *ret)
 	return (0);
 }
 
-int	print_cha(char var, t_info info, long long *ret)
+int	print_cha(char var, t_info2 info, long long *ret)
 {
 	info.blank = info.width - 1;
 	if (info.blank < 0)
@@ -112,9 +112,9 @@ int	print_cha(char var, t_info info, long long *ret)
 	return (0);
 }
 
-int	print_str(char *var, t_info info, long long *ret)
+int	print_str(char *var, t_info2 info, long long *ret)
 {
-	info.len = ft_strlen(&info, var);
+	info.len = ft_strlen3(&info, var);
 	info.zero = 0;
 	info.blank = get_blank_num(info);
 	*ret += info.len + info.blank;

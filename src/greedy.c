@@ -6,7 +6,7 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:08:37 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/22 12:23:04 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/24 09:58:46 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int	is_min(t_node *b, t_node *min, t_rotateNum rotate_cnt, t_info vars)
 {
 	b->ra_num = rotate_cnt.ra;
 	b->rb_num = rotate_cnt.rb;
-	if (rotate_cnt.ra > vars.a.len / 2) // 과반이면 ra보다 rra가 빠르다
-		b->ra_num = rotate_cnt.ra - vars.a.len; // reverse는 -로 처리
+	if (rotate_cnt.ra > vars.a.len / 2)
+		b->ra_num = rotate_cnt.ra - vars.a.len;
 	if (rotate_cnt.rb > vars.b.len / 2)
 		b->rb_num = rotate_cnt.rb - vars.b.len;
 	if ((ft_abs(b->ra_num) + ft_abs(b->rb_num)) \
@@ -68,7 +68,6 @@ int	is_min(t_node *b, t_node *min, t_rotateNum rotate_cnt, t_info vars)
 	return (0);
 }
 
-//min을 이중포인터로 받아야 하는 이유..
 void	get_min_instruction(t_info *vars, t_node **min)
 {
 	t_node		*a;
@@ -77,11 +76,11 @@ void	get_min_instruction(t_info *vars, t_node **min)
 
 	b = vars->b.top;
 	rotate_cnt.rb = 0;
-	while(b != NULL) // < get rb >
+	while (b != NULL)
 	{
 		a = vars->a.top;
 		rotate_cnt.ra = 1;
-		while (a->next != NULL) // < get ra >
+		while (a->next != NULL)
 		{
 			if ((a->index < b->index && b->index < a->next->index) \
 			|| (b->index < a->next->index && a->next->index < a->index) \

@@ -6,7 +6,7 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 09:36:56 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/21 09:39:10 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/24 10:03:16 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,28 @@
 
 void	ra(t_info *vars)
 {
-	if (vars->a.top == NULL || vars->a.len == 1)
+	if (rotate(&vars->a) == -1)
 		return ;
-	printf("ra\n");
-	rotate(&vars->a);
+	ft_printf("ra\n");
 }
 
 void	rb(t_info *vars)
 {
-	if (vars->b.top == NULL || vars->b.len == 1)
+	if (rotate(&vars->b) == -1)
 		return ;
-	printf("rb\n");
-	rotate(&vars->b);
+	ft_printf("rb\n");
 }
 
 void	rra(t_info *vars)
 {
-	if (vars->a.top == NULL || vars->a.len == 1)
+	if (r_rotate(&vars->a) == -1)
 		return ;
-	printf("rra\n");
-	r_rotate(&vars->a);
+	ft_printf("rra\n");
 }
 
 void	rrb(t_info *vars)
 {
-	if (vars->b.top == NULL || vars->b.len == 1)
+	if (r_rotate(&vars->b) == -1)
 		return ;
-	printf("rrb\n");
-	r_rotate(&vars->b);
+	ft_printf("rrb\n");
 }

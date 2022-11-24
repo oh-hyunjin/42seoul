@@ -6,32 +6,73 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:05:59 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/22 14:55:46 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/24 10:01:55 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	last_sort(t_info *vars)
+{
+	int		ra_num;
+	int		reverse_flag;
+	t_node	*a_node;
+
+	a_node = vars->a.top;
+	ra_num = 0;
+	reverse_flag = 0;
+	while (a_node != NULL)
+	{
+		if (a_node->index == 0)
+			break ;
+		a_node = a_node->next;
+		ra_num++;
+	}
+	if (ra_num > vars->a.len / 2)
+		reverse_flag = 1;
+	while (vars->a.top->index != 0)
+	{
+		if (reverse_flag != 1)
+			ra(vars);
+		else
+			rra(vars);
+		ra_num--;
+	}
+}
+
+int	free_split(char **split, int len)
+{
+	while (len >= 0)
+		free(split[len--]);
+	free(split);
+	return (-1);
+}
 
 int	main(int argc, char *argv[])
 {
 	t_info	vars;
 
 	if (argc == 1)
-		return (0); // 프롬프트 반환?
-	setting(&vars);
-	if (parsing(argc, argv, &vars.a) == -1)
 	{
-		printf("Error\n");
+		ft_printf("Error\n");
+		// system("leaks push_swap"); //지우기
 		return (0);
 	}
+	setting(&vars);
+	if (parsing(argv, &vars.a) == -1)
+	{
+		ft_printf("Error\n");
+		all_list_del(&vars);
+		// system("leaks push_swap"); //지우기
+		return (0);
+	}
+	if (vars.a.len == 1)
+		return (0);
 	indexing(&vars.a);
 	pivot(vars.a.len, &vars);
 	hardcoding(&vars);
 	greedy(&vars);
 	last_sort(&vars);
-	// system("leaks push_swap");
-	// ft_free(&a, &b); 만들기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	all_list_del(&vars);
+	// system("leaks push_swap"); //지우기
 }
-
-// TODO 인자값 에러처리(정수x, 정수 이상, 중복) -> Error\n 출력하기
-// TODO If no parameters are specified, the program must not display anything and give the prompt back.
