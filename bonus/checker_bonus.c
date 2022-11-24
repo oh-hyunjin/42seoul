@@ -6,7 +6,7 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:17:31 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/24 09:57:42 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/24 10:11:25 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	end_checker(t_info *vars, int flag)
 	else if (flag == KO)
 		ft_printf("KO\n");
 	all_list_del(vars);
-	system("leaks checker"); //지우기
 	return (0);
 }
 

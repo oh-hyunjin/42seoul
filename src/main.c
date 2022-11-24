@@ -6,7 +6,7 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:05:59 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/24 10:01:55 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/24 10:11:35 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	main(int argc, char *argv[])
 	if (argc == 1)
 	{
 		ft_printf("Error\n");
-		// system("leaks push_swap"); //지우기
 		return (0);
 	}
 	setting(&vars);
@@ -63,7 +62,6 @@ int	main(int argc, char *argv[])
 	{
 		ft_printf("Error\n");
 		all_list_del(&vars);
-		// system("leaks push_swap"); //지우기
 		return (0);
 	}
 	if (vars.a.len == 1)
@@ -74,5 +72,4 @@ int	main(int argc, char *argv[])
 	greedy(&vars);
 	last_sort(&vars);
 	all_list_del(&vars);
-	// system("leaks push_swap"); //지우기
 }

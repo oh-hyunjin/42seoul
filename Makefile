@@ -6,7 +6,7 @@
 #    By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 12:29:03 by hyoh              #+#    #+#              #
-#    Updated: 2022/11/24 09:32:58 by hyoh             ###   ########.fr        #
+#    Updated: 2022/11/24 10:08:59 by hyoh             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		=	push_swap
 NAME_BN		=	checker
 
 CC			=	cc
-CFLAG		=	-Wall -Wextra -Werror -g3#지우기
+CFLAG		=	-Wall -Wextra -Werror
 AR			=	ar -crs
 RM			=	rm -f
 
