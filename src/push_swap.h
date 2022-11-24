@@ -6,7 +6,7 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 14:24:37 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/24 10:02:36 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/24 10:20:38 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,5 @@ int		atoi_valid_check(t_list *a, char *str, int *result);
 int		new_add_list(t_list *a, int val);
 int		ft_abs(int num);
 int		duplicate_check(t_list *a, int num);
-
-// test.c
-void	test_print(t_list *a, t_list *b);
-void	command_test(t_list *a, t_list *b);
 
 #endif

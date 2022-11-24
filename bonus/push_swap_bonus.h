@@ -6,7 +6,7 @@
 /*   By: hyoh <hyoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 14:24:37 by hyoh              #+#    #+#             */
-/*   Updated: 2022/11/23 16:46:46 by hyoh             ###   ########.fr       */
+/*   Updated: 2022/11/24 10:21:18 by hyoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	setting(t_info *vars);
 int		parsing(char *argv[], t_list *a);
 int		free_split(char **split, int len);
 
-// instruction_bonus.c
+// instruction_together_bonus.c
 void	ss(t_info *vars);
 void	rr(t_info *vars);
 void	rrr(t_info *vars);
